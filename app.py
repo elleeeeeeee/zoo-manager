@@ -16,6 +16,24 @@ app.config['UPLOAD_FOLDER'] = 'static/files'
 db = SQLAlchemy(app)
 
 
+class Animal(db.Model):
+    __tablename__ = 'animal'
+    id = db.Column(db.Integer, primary_key=True)
+    kind = db.Column(db.String(100))
+    breed = db.Column(db.String(100))
+    age = db.Column(db.Integer)
+    gender = db.Column(db.String(100))
+    filename = db.Column(db.String)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'kind': self.kind,
+            'breed': self.breed,
+            'age': self.age,
+            'gender': self.gender,
+            'filename': self.filename
+        }
 
 
 
@@ -68,6 +86,26 @@ def create_animal():
         return redirect('/add/animals')
     return render_template('add_animal.html', form=form)
 
+@app.route('/update/animals/<int:id>', methods=['POST', 'GET'])
+def update_animal(id):
+    form = AnimalForm()
+    animal = Animal.query.get(id)
+    if form.validate_on_submit():
+        animal.kind = form.kind.data.lower()
+        animal.breed = form.breed.data
+        animal.age = form.age.data
+        animal.gender = form.gender.data
+        db.session.commit()
+        return redirect('/')
+    return render_template('update_animal.html', form=form, animal=animal)
+
+
+@app.route('/delete/animals/<int:id>')
+def delete_animal(id):
+    animal = Animal.query.get(id)
+    db.session.delete(animal)
+    db.session.commit()
+    return redirect('/')
 
 with app.app_context():
     db.create_all()
