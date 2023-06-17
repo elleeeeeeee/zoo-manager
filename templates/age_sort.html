@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+
+{% block title %}Zoo Manager{% endblock %}
+
+{% block content %}
+        <div class="main_content">
+        <h1 style="margin-bottom: 50px;">From: {{ from_age }}, To: {{ to_age }}</h1>
+            {% for animal in animals %}
+                <div class="main_item">
+                    <img src="/static/files/{{ animal.filename }}" alt="">
+                    <a href="/animals/{{ animal.kind }}" class="main_post">
+                        {{ animal.kind }}
+                    </a>
+                    <h1>Age: {{ animal.age }}</h1>
+                </div>
+            {% endfor %}
+        </div>
+{% endblock %}
