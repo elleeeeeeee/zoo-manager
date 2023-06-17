@@ -107,6 +107,21 @@ def delete_animal(id):
     db.session.commit()
     return redirect('/')
 
+@app.route('/new/arrivals')
+def new_arrivals():
+    animals = [animal.to_dict() for animal in Animal.query.order_by(Animal.id.desc())]
+    return render_template('new.html', animals=animals)
+
+@app.route('/animals/<string:kind>')
+def same_kind_animals(kind):
+    animal = [animal.to_dict() for animal in Animal.query.filter(Animal.kind == kind)]
+    return render_template('info_animal.html', animal=animal)
+
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 with app.app_context():
     db.create_all()
     app.run()
