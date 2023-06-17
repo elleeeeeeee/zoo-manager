@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+
+{% block title %}Zoo Manager{% endblock %}
+
+{% block content %}
+    <ul class="animal_info">
+         {% for info in animal %}
+            <li class="animal_item">
+                <div class="animal_item_header">
+                    <a href="/delete/animals/{{ info.id }}">delete</a>
+                    <a href="/update/animals/{{ info.id }}">update</a>
+                </div>
+                <div class="animal_info_content">
+                    <img src="/static/files/{{ info.filename }}" alt="animal image">
+                    <h1>Kind: {{ info.kind }}</h1>
+                    <h2>Breed: {{ info.breed }}</h2>
+                    <h3>Age: {{ info.age }}</h3>
+                    <h4>Gender: {{ info.gender }}</h4>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
