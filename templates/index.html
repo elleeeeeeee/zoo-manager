@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kablammo&family=Moirai+One&family=Tilt+Prism&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com%22%3E/
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="shortcut icon" href="{{ url_for("static", filename="files/fav-icon.ico") }}">
+    <link rel="stylesheet" href="{{ url_for("static",filename ='css/style.css') }}">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <ul class="header_inner">
+                <li class="header_logo">
+                    <a href="/">ZOO Manager</a>
+                </li>
+
+                <ul class="nav">
+                    <li class="nav_item">
+                        <a href="/">home</a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="/about">about</a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="/new/arrivals">new arrivals</a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="/add/animals">add animal</a>
+                    </li>
+                </ul>
+            </ul>
+        </div>
+    </header>
+
+    <main class="main">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

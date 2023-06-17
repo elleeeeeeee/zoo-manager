@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+
+{% block title %}Zoo Manager{% endblock %}
+
+{% block content %}
+        <div class="main_content">
+            <form action="/age/sort" class="main_price_form" method="post">
+                <label for="from_age" class="main_form_item">
+                    <h1 class="main_price_title">Age From:</h1>
+                    <input type="number" class="main_price_input" name="from_age" value="0">
+                </label>
+                <label for="to_age">
+                    <h1 class="main_price_title">To:</h1>
+                    <input type="number" class="main_price_input" name="to_age" value="0">
+                </label>
+                <label for="submit">
+                    <input type="submit" name="submit" value="OK" class="main_price_submit">
+                </label>
+            </form>
+            {% for k,v in dickt.items() %}
+                <div class="main_item">
+                    <img src="/static/files/{{ v.image }}" alt="">
+                    <a href="/animals/{{ k }}" class="main_post">
+                        {{ k }}-{{ v.count }}
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+{% endblock %}
