@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+
+{% block title %}Zoo Manager{% endblock %}
+
+{% block content %}
+     <div class="main_content add_post">
+            <h1 style="margin-bottom: 30px; text-transform: capitalize;">update form</h1>
+            <form action="" method="post" class="add_post_form" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <label for="kind" class="add_post_item">
+                    <h1>Enter kind:</h1>
+                    {{ form.kind(value_=animal.kind) }}
+                </label>
+                <label for="breed" class="add_post_item">
+                    <h1>Enter breed:</h1>
+                    {{ form.breed(value_=animal.breed) }}
+                </label>
+                <label for="age" class="add_post_item">
+                    <h1>Enter age:</h1>
+                    {{ form.age(value_=animal.age) }}
+                </label>
+                <label for="gender" class="add_post_item">
+                    <h1>Enter gender:</h1>
+                    {{ form.gender(value_=animal.gender) }}
+                </label>
+                <label for="submit" class="add_post_btn">
+                    {{ form.create }}
+                </label>
+            </form>
+        </div>
+{% endblock %}
