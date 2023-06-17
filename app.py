@@ -122,6 +122,34 @@ def same_kind_animals(kind):
 def about():
     return render_template('about.html')
 
+@app.route('/api')
+def api():
+    animal_kind = request.args.get('kind')
+    animal_breed = request.args.get('breed')
+    animal_age = request.args.get('age')
+    animal_gender = request.args.get('gender')
+    if animal_kind:
+        animals = [animal.to_dict() for animal in Animal.query.filter(Animal.name == animal_kind)]
+    elif animal_breed:
+        animals = [animal.to_dict() for animal in Animal.query.filter(Animal.name == animal_breed)]
+    elif animal_age:
+        animals = [animal.to_dict() for animal in Animal.query.filter(Animal.name == animal_age)]
+    elif animal_gender:
+        animals = [animal.to_dict() for animal in Animal.query.filter(Animal.name == animal_gender)]
+    else:
+        animals = [animal.to_dict() for animal in Animal.query.all()]
+    return animals, 200
+
+
+@app.route('/age/sort', methods=['POST', 'GET'])
+def age_sort():
+    if request.method == 'POST':
+        from_age = request.form['from_age']
+        to_age = request.form['to_age']
+        animals = [animal.to_dict() for animal in Animal.query.filter(Animal.age >= int(from_age)).filter(Animal.age <= int(to_age))]
+        return render_template('age_sort.html', animals=animals, from_age=from_age, to_age=to_age)
+
+
 with app.app_context():
     db.create_all()
     app.run()
